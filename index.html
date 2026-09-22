@@ -90,13 +90,18 @@
 
     <script src="vendor/audiobuffer-to-wav.js"></script>
     <script>
+      const { Buffer } = require('buffer')
+      const {
+        ipcRenderer,
+      } = require('electron')
+
       let activeThing = { dispose: () => {} }
 
       function showStatus(text) {
         statusText.textContent = text
       }
       settingsForm.alwaysOnTop.onchange = () => {
-        getCurrentWindow().setAlwaysOnTop(settingsForm.alwaysOnTop.checked)
+        ipcRenderer.send('setAlwaysOnTop', settingsForm.alwaysOnTop.checked)
       }
       settingsForm.autoPaste.onchange = () => {
         ipcRenderer.send('clipboardMonitor', {
@@ -104,12 +109,6 @@
         })
       }
       showStatus('Waiting for an image to be pasted in...')
-
-      const { Buffer } = require('buffer')
-      const {
-        ipcRenderer,
-        remote: { getCurrentWindow, clipboard },
-      } = require('electron')
 
       ipcRenderer.on('pasted', (event, { image }) => {
         handleFile(new Blob([image], { type: 'image/png' }))

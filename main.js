@@ -6,6 +6,13 @@ import path from 'path'
 const removeQueue = []
 let recycled = 0
 
+ipcMain.on('setAlwaysOnTop', (event, flag) => {
+  const win = BrowserWindow.fromWebContents(event.sender)
+  if (win) {
+    win.setAlwaysOnTop(flag)
+  }
+})
+
 ipcMain.on('dragstart', (event, options) => {
   const filePath = tempWrite.sync(options.buffer, options.name)
   event.sender.startDrag({
@@ -69,7 +76,7 @@ function createWindow() {
     backgroundColor: '#00353433',
     acceptFirstMouse: true,
     webPreferences: {
-      enableRemoteModule: true,
+      contextIsolation: false,
       nodeIntegration: true,
     },
   })
