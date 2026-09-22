@@ -1,0 +1,1 @@
+- The outline is taken from the `app` symbol from SF Symbols.

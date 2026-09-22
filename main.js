@@ -1,7 +1,8 @@
-const { app, ipcMain, BrowserWindow, clipboard } = require('electron')
-const tempWrite = require('temp-write')
-const fs = require('fs')
-const path = require('path')
+import { app, ipcMain, BrowserWindow, clipboard } from 'electron'
+import tempWrite from 'temp-write'
+import fs from 'fs'
+import path from 'path'
+
 const removeQueue = []
 let recycled = 0
 
