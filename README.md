@@ -11,8 +11,8 @@ An Electron app for macOS that lets you paste image data from an application and
 
 1. Clone the repository
 
-2. `yarn`
+2. `pnpm install`
 
-3. `yarn build`
+3. `pnpm run build`
 
 4. Open `dist/mac/pastebox.app`
